@@ -18,6 +18,7 @@ public class JobTest {
         Job bestJob = new Job();
         Job worstJob = new Job();
 
+        //id values are not the same
         assertNotEquals(bestJob.getId(), worstJob.getId());
     }
 
@@ -44,8 +45,30 @@ public class JobTest {
         Job jobOne = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         Job jobTwo = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
+        // id values are not the same
         assertFalse(jobOne.equals(jobTwo));
     }
 
+    @Test
+    public void testToStringStartsAndEndsWithNewLine(){
+        Job testJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
+        assertEquals('\n', testJob2.toString().charAt(0));
+        assertEquals('\n', testJob2.toString().charAt(testJob2.toString().length() -1));
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData(){
+        Job testJob3 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+        assertEquals("\nID: " + testJob3.getId() + "\nName: Product tester\nEmployer: ACME\nLocation: Desert\nPosition Type: Quality control\nCore Competency: Persistence\n", testJob3.toString());
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField(){
+        Job testJob4 = new Job("Product tester", new Employer(""), new Location("Desert"), new PositionType(""), new CoreCompetency("Persistence"));
+
+        assertEquals("\nID: " + testJob4.getId() + "\nName: Product tester\nEmployer: Data not available\nLocation: Desert\nPosition Type: Data not available\nCore Competency: Persistence\n", testJob4.toString());
+
+    }
 }
