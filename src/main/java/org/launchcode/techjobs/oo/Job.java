@@ -17,10 +17,10 @@ public class Job {
     //  other five fields. The second constructor should also call the first in order to initialize
     //  the 'id' field.
 
- public Job(){
-     id = nextId;
-     nextId++;
- }
+    public Job() {
+        id = nextId;
+        nextId++;
+    }
 
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
         this();
@@ -97,13 +97,37 @@ public class Job {
 
     @Override
     public String toString() {
-            return "\n" +
-                    "ID: " + id +
-                    "\nName: " + name +
-                    "\nEmployer: " + employer.getValue() +
-                    "\nLocation: " + location.getValue() +
-                    "\nPosition Type: " + positionType.getValue() +
-                    "\nCore Competency: " + coreCompetency.getValue() +
-                    "\n";
+        String aString;
+
+        if(getName().equals("")) {
+            aString = "\nID: " + getId() + "\nName: Data not available";
+        } else {
+            aString = "\nID: " + getId() + "\nName: " + getName();
         }
+
+        if (getEmployer().getValue().equals("")) {
+            aString = aString + "\nEmployer: Data not available";
+        } else {
+            aString = aString + "\nEmployer: " + getEmployer();
+        }
+
+        if (getLocation().getValue().equals("")) {
+            aString = aString + "\nLocation: Data not available";
+        } else {
+            aString = aString + "\nLocation: " + getLocation();
+        }
+
+        if (getPositionType().getValue().equals("")) {
+            aString = aString + "\nPosition Type: Data not available";
+        } else {
+            aString = aString + "\nPosition Type: " + getPositionType();
+        }
+
+        if (getCoreCompetency().getValue().equals("")) {
+            aString = aString + "\nCore Competency: Data not available";
+        } else {
+            aString = aString + "\nCore Competency: " + getCoreCompetency() + "\n";
+        }
+        return aString;
+    }
 }
